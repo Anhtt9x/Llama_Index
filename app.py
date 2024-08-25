@@ -13,11 +13,12 @@ load_dotenv()
 
 google_api_key = os.getenv("GOOGLE_API_KEY")
 
+
 data = SimpleDirectoryReader("data")
 
 documents = data.load_data()
 
-gemini=Gemini(model_name="models/gemini-1.5-pro",api_key=google_api_key)
+gemini=Gemini(model="models/gemini-1.5-pro",api_key=google_api_key)
 
 Settings.llm = gemini
 
@@ -32,6 +33,6 @@ index.storage_context.persist("storage")
 
 engine = index.as_query_engine()
 
-response = engine.query("Your query here")
+response = engine.query("what is RAG domain ?")
 print(response.response)
 

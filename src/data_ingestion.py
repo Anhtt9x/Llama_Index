@@ -3,11 +3,11 @@ from llama_index.core import SimpleDirectoryReader
 import sys
 
 
-def load_data():
+def load_data(data_path):
     try:
         logging.info("Data starting loaded...")
 
-        data = SimpleDirectoryReader("data")
+        data = SimpleDirectoryReader(data_path)
 
         documents = data.load_data()
         

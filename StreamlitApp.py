@@ -10,13 +10,22 @@ def main():
 
     st.header("QA with RAG documents")
 
+    uploader = st.file_uploader("Upload your documents",type=["pdf","jpg"])
 
     inputs = st.text_input("Let's ask the model")
 
-    if inputs:
+    if uploader is not None and inputs:
         with st.spinner("Model response..."):
 
-            documents = load_data()
+            tmp_dir = tempfile.mkdtemp()
+
+            tmp_file = os.path.join(tmp_dir,uploader.name)
+
+            with open(tmp_file,"wb") as tmp:
+                tmp.write(uploader.read())
+
+
+            documents = load_data(tmp_dir)
 
             model = load_model()
 
